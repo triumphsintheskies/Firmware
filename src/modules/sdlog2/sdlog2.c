@@ -474,7 +474,7 @@ int create_log_dir()
 	}
 
 	/* print logging path, important to find log file later */
-	mavlink_and_console_log_info(mavlink_fd, "[blackbox] %s", log_dir);
+	//mavlink_and_console_log_info(mavlink_fd, "[blackbox] %s", log_dir);
 
 	return 0;
 }
