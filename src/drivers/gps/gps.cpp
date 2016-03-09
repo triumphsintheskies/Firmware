@@ -68,8 +68,7 @@ public:
 
 private:
 
-	int				_serial_fd;					///< serial interface to GPS
-	char				_port[20];					///< device / serial port path
+	//int				_serial_fd;					///< serial interface to GPS
 	volatile int			_task;						///< worker task
 
 
