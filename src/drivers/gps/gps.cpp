@@ -68,7 +68,7 @@ public:
 
 private:
 
-	//int				_serial_fd;					///< serial interface to GPS
+	int				_serial_fd;					///< serial interface to GPS
 	volatile int			_task;						///< worker task
 
 
@@ -135,27 +135,26 @@ GPS::task_main()
 {
 	/* open the serial port */
 
-	//_serial_fd = ::open("/dev/tty-4", O_RDWR);
+	_serial_fd = ::open("/dev/tty-4", O_RDWR);
 
-	//if (_serial_fd < 0) {
-	//	while (true) {
-	//		PX4_WARN("failed to open serial port: %s err: %d", _port, errno);
-	//	}
+	if (_serial_fd < 0) {
+		PX4_WARN("failed to open serial port");
 
-	//	/* tell the dtor that we are exiting, set error code */
-	//	_task = -1;
-	//	return;
-	//}
+		/* tell the dtor that we are exiting, set error code */
+		_task = -1;
+		return;
+	}
 
-	//PX4_WARN("exiting");
+	PX4_WARN("exiting");
 
-	//::close(_serial_fd);
+	::close(_serial_fd);
 
 	/* tell the dtor that we are exiting */
-		while (true) {
-			PX4_WARN("looping");
-			usleep(1000000);
-		}
+	while (true) {
+		PX4_WARN("looping");
+		usleep(1000000);
+	}
+
 	_task = -1;
 
 
