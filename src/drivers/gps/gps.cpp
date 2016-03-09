@@ -135,21 +135,22 @@ void
 GPS::task_main()
 {
 	/* open the serial port */
-	_serial_fd = ::open("/dev/tty-4", O_RDWR);
 
-	if (_serial_fd < 0) {
-		while (true) {
-			PX4_WARN("failed to open serial port: %s err: %d", _port, errno);
-		}
+	//_serial_fd = ::open("/dev/tty-4", O_RDWR);
 
-		/* tell the dtor that we are exiting, set error code */
-		_task = -1;
-		return;
-	}
+	//if (_serial_fd < 0) {
+	//	while (true) {
+	//		PX4_WARN("failed to open serial port: %s err: %d", _port, errno);
+	//	}
 
-	PX4_WARN("exiting");
+	//	/* tell the dtor that we are exiting, set error code */
+	//	_task = -1;
+	//	return;
+	//}
 
-	::close(_serial_fd);
+	//PX4_WARN("exiting");
+
+	//::close(_serial_fd);
 
 	/* tell the dtor that we are exiting */
 	_task = -1;
