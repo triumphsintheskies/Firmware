@@ -62,15 +62,12 @@ public:
 	/**
 	 * Diagnostics - print some basic information about the driver.
 	 */
-	void				print_info();
 
 	int init();
 
 private:
 
-	bool				_task_should_exit;				///< flag to make the main worker task exit
 	int				_serial_fd;					///< serial interface to GPS
-	unsigned			_baudrate;					///< current baudrate
 	char				_port[20];					///< device / serial port path
 	volatile int			_task;						///< worker task
 
@@ -98,19 +95,17 @@ extern "C" __EXPORT int gps_main(int argc, char *argv[]);
 namespace
 {
 
-GPS	*g_dev = nullptr;
+GPS *g_dev = nullptr;
 
 }
 
 
-GPS::GPS() :
-	_task_should_exit(false)
+GPS::GPS()
 {
 }
 
 GPS::~GPS()
 {
-	g_dev = nullptr;
 }
 
 int
@@ -254,8 +249,6 @@ info()
 	if (g_dev == nullptr) {
 		errx(1, "not running");
 	}
-
-	g_dev->print_info();
 
 	return;
 }
