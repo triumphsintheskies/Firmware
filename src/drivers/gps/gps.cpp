@@ -152,8 +152,15 @@ GPS::task_main()
 	//::close(_serial_fd);
 
 	/* tell the dtor that we are exiting */
+		while (true) {
+			PX4_WARN("looping");
+			usleep(1000000);
+		}
 	_task = -1;
-	px4_task_exit(0);
+
+
+
+	//px4_task_exit(0);
 }
 
 
@@ -215,8 +222,6 @@ stop()
 {
 	delete g_dev;
 	g_dev = nullptr;
-
-	px4_task_exit(0);
 }
 
 /**
