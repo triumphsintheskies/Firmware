@@ -135,7 +135,7 @@ void
 GPS::task_main()
 {
 	/* open the serial port */
-	_serial_fd = ::open(_port, O_RDWR);
+	_serial_fd = ::open("/dev/tty-4", O_RDWR);
 
 	if (_serial_fd < 0) {
 		while (true) {
