@@ -49,6 +49,7 @@
 #include <errno.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <string.h>
 
 #define GPS_DEFAULT_UART_PORT "/dev/tty-4"
 
@@ -166,7 +167,7 @@ namespace gps
 
 GPS	*g_dev = nullptr;
 
-void	start(const char *uart_path, bool fake_gps, bool enable_sat_info);
+void	start();
 void	stop();
 void	test();
 void	reset();
@@ -259,40 +260,11 @@ info()
 int
 gps_main(int argc, char *argv[])
 {
-	/* set to default */
-	const char *device_name = GPS_DEFAULT_UART_PORT;
-	bool fake_gps = false;
-	bool enable_sat_info = false;
-
 	/*
 	 * Start/load the driver.
 	 */
 	if (!strcmp(argv[1], "start")) {
 		/* work around getopt unreliability */
-		if (argc > 3) {
-			if (!strcmp(argv[2], "-d")) {
-				device_name = argv[3];
-
-			} else {
-				PX4_ERR("DID NOT GET -d");
-				goto out;
-			}
-		}
-
-		/* Detect fake gps option */
-		for (int i = 2; i < argc; i++) {
-			if (!strcmp(argv[i], "-f")) {
-				fake_gps = true;
-			}
-		}
-
-		/* Detect sat info option */
-		for (int i = 2; i < argc; i++) {
-			if (!strcmp(argv[i], "-s")) {
-				enable_sat_info = true;
-			}
-		}
-
 		gps::start();
 	}
 
@@ -322,7 +294,4 @@ gps_main(int argc, char *argv[])
 	}
 
 	return 0;
-
-out:
-	return 1;
 }
