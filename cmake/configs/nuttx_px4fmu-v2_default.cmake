@@ -46,7 +46,7 @@ set(config_module_list
 	drivers/pwm_input
 	drivers/camera_trigger
 	drivers/bst
-
+	examples/px4_simple_app
 	#
 	# System commands
 	#
